@@ -92,16 +92,6 @@ body {
   position: relative;
 }
 
-/* Card content sits below holo layers so shimmer overlays it */
-.card-numeral,
-.card-suit-icon,
-.card-title,
-.card-ornament,
-.card-subtitle,
-.card-corner-tl {
-  position: relative;
-  z-index: 1;
-}
 
 /* Ornate corner details */
 .card-front::before {
