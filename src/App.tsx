@@ -1,5 +1,6 @@
 import TipDeck from './TipDeck'
 import './styles.css'
+import './holo.css'
 
 function App() {
   return (

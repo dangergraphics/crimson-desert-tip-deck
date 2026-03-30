@@ -92,6 +92,17 @@ body {
   position: relative;
 }
 
+/* Card content above holo layers */
+.card-numeral,
+.card-suit-icon,
+.card-title,
+.card-ornament,
+.card-subtitle,
+.card-corner-tl {
+  position: relative;
+  z-index: 12;
+}
+
 /* Ornate corner details */
 .card-front::before {
   content: '';
