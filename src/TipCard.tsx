@@ -29,7 +29,7 @@ const TipCard: React.FC<TipCardProps> = ({
 
   const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     const el = frontRef.current
-    if (!el || !isActive) return
+    if (!el) return
     const rect = el.getBoundingClientRect()
     const x = clamp((e.clientX - rect.left) / rect.width  * 100, 0, 100)
     const y = clamp((e.clientY - rect.top)  / rect.height * 100, 0, 100)
