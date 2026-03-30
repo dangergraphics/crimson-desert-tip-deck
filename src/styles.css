@@ -22,19 +22,30 @@ body {
   align-items: center;
   overflow: hidden;
   position: relative;
-  background: radial-gradient(ellipse at 50% 30%, #2A0D00 0%, #1A0A00 60%, #0A0500 100%);
+  background: #0A0500;
+  /* Hero art as full background */
+  background-image: url('/assets/hero-2.jpg');
+  background-size: cover;
+  background-position: center 20%;
 }
 
-/* Subtle texture overlay */
-.app::before {
+/* Dark overlay over hero bg so cards pop */
+.app::after {
   content: '';
   position: fixed;
   inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='4' height='4' fill='%231A0A00'/%3E%3Crect width='1' height='1' x='0' y='0' fill='%23200C00' opacity='0.5'/%3E%3Crect width='1' height='1' x='2' y='2' fill='%23200C00' opacity='0.5'/%3E%3C/svg%3E");
+  background: linear-gradient(
+    to bottom,
+    rgba(10,3,0,0.55) 0%,
+    rgba(10,3,0,0.4) 40%,
+    rgba(10,3,0,0.8) 75%,
+    rgba(10,3,0,0.95) 100%
+  );
   pointer-events: none;
   z-index: 0;
-  opacity: 0.6;
 }
+
+
 
 /* Header */
 .app-header {
@@ -43,25 +54,26 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 28px;
-  gap: 4px;
+  padding-top: 20px;
+  gap: 2px;
 }
 
-.app-title {
-  font-family: 'Cinzel', serif;
-  font-weight: 700;
-  font-size: 22px;
-  letter-spacing: 0.3em;
-  color: #C9A84C;
-  text-shadow: 0 0 20px rgba(201, 168, 76, 0.4);
+.app-logo {
+  height: 72px;
+  width: auto;
+  object-fit: contain;
+  /* Logo is gold on white — invert to gold on transparent */
+  filter: drop-shadow(0 2px 12px rgba(201,168,76,0.5));
+  /* The official logo has a white bg — mix-blend-mode makes it transparent on dark */
+  mix-blend-mode: lighten;
 }
 
 .app-subtitle {
   font-family: 'Crimson Text', serif;
   font-style: italic;
-  font-size: 13px;
-  letter-spacing: 0.2em;
-  color: #E8D9B060;
+  font-size: 12px;
+  letter-spacing: 0.25em;
+  color: #E8D9B055;
   text-transform: uppercase;
 }
 
@@ -75,7 +87,7 @@ body {
   justify-content: center;
   padding-bottom: 120px;
   perspective: 1200px;
-  z-index: 1;
+  z-index: 2;
 }
 
 /* Card faces */
@@ -99,22 +111,41 @@ body {
   flex-direction: column;
   align-items: center;
   position: relative;
+  overflow: hidden;
 }
 
-/* Ornate corner details */
-.card-front::before,
+/* Dark gradient overlay over character art so text is legible */
 .card-front::after {
   content: '';
   position: absolute;
-  border: 1px solid #C9A84C40;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(10,3,0,0.25) 0%,
+    rgba(10,3,0,0.1) 30%,
+    rgba(10,3,0,0.5) 60%,
+    rgba(10,3,0,0.92) 100%
+  );
+  border-radius: 10px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Ensure all card-front children sit above the overlay */
+.card-front > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Ornate inner border frame */
+.card-front::before {
+  content: '';
+  position: absolute;
+  border: 1px solid #C9A84C50;
   border-radius: 8px;
   inset: 6px;
   pointer-events: none;
-}
-
-.card-front::after {
-  inset: 9px;
-  border-color: #C9A84C20;
+  z-index: 2;
 }
 
 .card-numeral {
@@ -346,7 +377,7 @@ body {
   font-size: 10px;
   letter-spacing: 0.15em;
   color: #C9A84C40;
-  z-index: 10;
+  z-index: 20;
   pointer-events: none;
   text-transform: uppercase;
 }

@@ -5,7 +5,7 @@ function App() {
   return (
     <div className="app">
       <header className="app-header">
-        <span className="app-title">CRIMSON DESERT</span>
+        <img src="/assets/logo.png" alt="Crimson Desert" className="app-logo" />
         <span className="app-subtitle">Tip Deck</span>
       </header>
       <TipDeck />

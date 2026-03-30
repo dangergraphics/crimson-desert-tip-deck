@@ -14,6 +14,13 @@ export const SUIT_ICONS: Record<TipCard['suit'], string> = {
   social: '🤝',
 }
 
+export const SUIT_ART: Record<TipCard['suit'], string> = {
+  combat: '/assets/suit-combat.jpg',
+  exploration: '/assets/suit-exploration.jpg',
+  abyss: '/assets/suit-abyss.jpg',
+  social: '/assets/suit-social.jpg',
+}
+
 export const cards: TipCard[] = [
   {
     id: 1,
