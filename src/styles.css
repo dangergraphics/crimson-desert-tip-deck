@@ -260,14 +260,18 @@ body {
 .flip-modal-card {
   background: linear-gradient(160deg, #EDD9A3 0%, #E8D9B0 40%, #DBC99A 100%);
   border: 1.5px solid #8B0000;
-  border-radius: 12px;
-  padding: 28px 28px 20px;
-  width: 100%;
-  max-width: 400px;
+  border-radius: 16px;
+  padding: 32px 28px 24px;
+  /* Playing card ratio: 2.5 × 3.5 = 5:7 */
+  width: min(340px, 80vw);
+  aspect-ratio: 5 / 7;
   cursor: default;
   box-shadow: 0 40px 80px rgba(0,0,0,0.9), 0 0 40px rgba(201,168,76,0.2);
   animation: modalIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 .flip-modal-card::before {
@@ -313,11 +317,12 @@ body {
 
 .flip-modal-body {
   font-family: 'Crimson Text', serif;
-  font-size: 16px;
+  font-size: 15px;
   line-height: 1.7;
   color: #2A1200;
   margin: 0;
   padding: 4px 0;
+  flex: 1;
 }
 
 .flip-modal-close {
