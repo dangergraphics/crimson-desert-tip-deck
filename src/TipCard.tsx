@@ -21,38 +21,55 @@ const TipCard: React.FC<TipCardProps> = ({
   zIndex,
   onClick,
 }) => {
+  // Arc wrapper: purely positional — translateX for spread, rotate for arc, translateY for active lift
+  // NO transformOrigin other than default (top-left), so it doesn't interfere with the flip
   const wrapperStyle: React.CSSProperties = {
     position: 'absolute',
+    // Center horizontally, sit at bottom
     bottom: 0,
-    left: '50%',
+    left: `calc(50% + ${offsetX}px - 110px)`, // 110 = half card width
+    transition: 'all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)',
+    zIndex,
+    cursor: 'pointer',
+    filter: isActive
+      ? 'drop-shadow(0 20px 40px rgba(0,0,0,0.9)) drop-shadow(0 0 20px rgba(201,168,76,0.25))'
+      : 'drop-shadow(0 8px 16px rgba(0,0,0,0.6))',
+  }
+
+  // Inner arc rotator: applies the fan angle around the card's own bottom-center
+  const arcStyle: React.CSSProperties = {
+    width: 220,
+    height: 320,
     transformOrigin: 'bottom center',
     transform: `
-      translateX(calc(-50% + ${offsetX}px))
       rotate(${rotation}deg)
       translateY(${isActive ? -50 : 0}px)
       scale(${isActive ? 1.08 : 1})
     `,
-    zIndex,
     transition: 'transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)',
-    cursor: 'pointer',
+  }
+
+  const flipContainerStyle: React.CSSProperties = {
+    width: 220,
+    height: 320,
   }
 
   const cardStyle: React.CSSProperties = {
     width: 220,
     height: 320,
     position: 'relative',
-    transformStyle: 'preserve-3d',
-    transition: 'transform 0.6s ease',
+    transformStyle: 'preserve-3d' as const,
+    transition: 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
+    // Flat flip: rotate on Y axis, stays in place
     transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)',
-    filter: isActive
-      ? 'drop-shadow(0 20px 40px rgba(0,0,0,0.9)) drop-shadow(0 0 20px rgba(201,168,76,0.25))'
-      : 'drop-shadow(0 8px 16px rgba(0,0,0,0.6))',
   }
 
   const suitIcon = SUIT_ICONS[card.suit]
 
   return (
     <div style={wrapperStyle} onClick={onClick}>
+      <div style={arcStyle}>
+      <div style={flipContainerStyle}>
       <div style={cardStyle}>
         {/* Front Face */}
         <div className="card-face card-front">
@@ -75,6 +92,8 @@ const TipCard: React.FC<TipCardProps> = ({
           <div className="card-ornament card-ornament-dark" />
           <div className="card-back-numeral">{card.numeral}</div>
         </div>
+      </div>
+      </div>
       </div>
     </div>
   )
