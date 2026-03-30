@@ -73,7 +73,7 @@ body {
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  padding-bottom: 60px;
+  padding-bottom: 120px;
   perspective: 1200px;
   z-index: 1;
 }
