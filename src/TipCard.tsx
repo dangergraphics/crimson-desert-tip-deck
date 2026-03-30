@@ -1,6 +1,6 @@
 import React from 'react'
 import type { TipCard as TipCardType } from './cards'
-import { SUIT_ICONS, SUIT_ART } from './cards'
+import { SUIT_ICONS } from './cards'
 
 interface TipCardProps {
   card: TipCardType
@@ -57,22 +57,13 @@ const TipCard: React.FC<TipCardProps> = ({
   }
 
   const suitIcon = SUIT_ICONS[card.suit]
-  const suitArt = SUIT_ART[card.suit]
-
   return (
     <div style={wrapperStyle} onClick={onClick}>
       <div style={arcStyle}>
       <div style={flipContainerStyle}>
       <div style={cardStyle}>
         {/* Front Face */}
-        <div
-          className="card-face card-front"
-          style={{
-            backgroundImage: `url(${suitArt})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center top',
-          }}
-        >
+        <div className="card-face card-front">
           <div className="card-numeral">{card.numeral}</div>
           <div className="card-suit-icon">{suitIcon}</div>
           <div className="card-title">{card.title}</div>

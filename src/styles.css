@@ -22,27 +22,7 @@ body {
   align-items: center;
   overflow: hidden;
   position: relative;
-  background: #0A0500;
-  /* Hero art as full background */
-  background-image: url('/assets/hero-2.jpg');
-  background-size: cover;
-  background-position: center 20%;
-}
-
-/* Dark overlay over hero bg so cards pop */
-.app::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(10,3,0,0.55) 0%,
-    rgba(10,3,0,0.4) 40%,
-    rgba(10,3,0,0.8) 75%,
-    rgba(10,3,0,0.95) 100%
-  );
-  pointer-events: none;
-  z-index: 0;
+  background: radial-gradient(ellipse at 50% 30%, #2A0D00 0%, #1A0A00 60%, #0A0500 100%);
 }
 
 
@@ -55,17 +35,16 @@ body {
   flex-direction: column;
   align-items: center;
   padding-top: 20px;
-  gap: 2px;
+  gap: 4px;
 }
 
 .app-logo {
-  height: 72px;
+  height: 64px;
   width: auto;
   object-fit: contain;
-  /* Logo is gold on white — invert to gold on transparent */
-  filter: drop-shadow(0 2px 12px rgba(201,168,76,0.5));
-  /* The official logo has a white bg — mix-blend-mode makes it transparent on dark */
+  /* Logo has white bg — lighten blend mode makes it transparent on dark */
   mix-blend-mode: lighten;
+  filter: drop-shadow(0 0 16px rgba(201,168,76,0.35));
 }
 
 .app-subtitle {
@@ -87,7 +66,7 @@ body {
   justify-content: center;
   padding-bottom: 120px;
   perspective: 1200px;
-  z-index: 2;
+  z-index: 1;
 }
 
 /* Card faces */
@@ -111,41 +90,25 @@ body {
   flex-direction: column;
   align-items: center;
   position: relative;
-  overflow: hidden;
 }
 
-/* Dark gradient overlay over character art so text is legible */
-.card-front::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(10,3,0,0.25) 0%,
-    rgba(10,3,0,0.1) 30%,
-    rgba(10,3,0,0.5) 60%,
-    rgba(10,3,0,0.92) 100%
-  );
-  border-radius: 10px;
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* Ensure all card-front children sit above the overlay */
-.card-front > * {
-  position: relative;
-  z-index: 1;
-}
-
-/* Ornate inner border frame */
+/* Ornate corner details */
 .card-front::before {
   content: '';
   position: absolute;
-  border: 1px solid #C9A84C50;
+  border: 1px solid #C9A84C40;
   border-radius: 8px;
   inset: 6px;
   pointer-events: none;
-  z-index: 2;
+}
+
+.card-front::after {
+  content: '';
+  position: absolute;
+  border: 1px solid #C9A84C18;
+  border-radius: 6px;
+  inset: 10px;
+  pointer-events: none;
 }
 
 .card-numeral {
