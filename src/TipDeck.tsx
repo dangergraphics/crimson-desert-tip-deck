@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import TipCard from './TipCard'
-import { cards } from './cards'
+import { cards, SUIT_ICONS } from './cards'
 
 const TOTAL = cards.length
 const CARD_SPREAD_X = 32 // px between card centers
@@ -39,13 +39,34 @@ const TipDeck: React.FC = () => {
     }
   }
 
+  const flippedCard = flippedIndex !== null ? cards[flippedIndex] : null
+
   return (
     <div className="deck-container">
+      {/* Fullscreen modal when a card is flipped */}
+      {flippedCard && (
+        <>
+          <div className="flip-backdrop" onClick={() => setFlippedIndex(null)} />
+          <div className="flip-modal" onClick={() => setFlippedIndex(null)}>
+            <div className="flip-modal-card" onClick={e => e.stopPropagation()}>
+              <div className="flip-modal-header">
+                <span className="flip-modal-suit">{SUIT_ICONS[flippedCard.suit]}</span>
+                <span className="flip-modal-title">{flippedCard.title}</span>
+                <span className="flip-modal-numeral">{flippedCard.numeral}</span>
+              </div>
+              <div className="card-ornament card-ornament-dark" />
+              <p className="flip-modal-body">{flippedCard.body}</p>
+              <div className="card-ornament card-ornament-dark" />
+              <div className="flip-modal-close">tap anywhere to close · esc</div>
+            </div>
+          </div>
+        </>
+      )}
+
       {cards.map((card, i) => {
         const offset = i - activeIndex
         const rotation = offset * ROTATION_PER_CARD
         const offsetX = offset * CARD_SPREAD_X
-        // Cards closer to center get higher z-index
         const zIndex = TOTAL - Math.abs(offset)
 
         return (

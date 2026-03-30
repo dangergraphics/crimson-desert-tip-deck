@@ -230,6 +230,106 @@ body {
   margin-top: 4px;
 }
 
+/* Flip backdrop */
+.flip-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 3, 0, 0.75);
+  z-index: 999;
+  cursor: pointer;
+  animation: backdropIn 0.3s ease forwards;
+}
+
+@keyframes backdropIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Flip modal */
+.flip-modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 24px;
+  cursor: pointer;
+}
+
+.flip-modal-card {
+  background: linear-gradient(160deg, #EDD9A3 0%, #E8D9B0 40%, #DBC99A 100%);
+  border: 1.5px solid #8B0000;
+  border-radius: 12px;
+  padding: 28px 28px 20px;
+  width: 100%;
+  max-width: 400px;
+  cursor: default;
+  box-shadow: 0 40px 80px rgba(0,0,0,0.9), 0 0 40px rgba(201,168,76,0.2);
+  animation: modalIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  position: relative;
+}
+
+.flip-modal-card::before {
+  content: '';
+  position: absolute;
+  border: 1px solid #8B000030;
+  border-radius: 8px;
+  inset: 6px;
+  pointer-events: none;
+}
+
+@keyframes modalIn {
+  from { opacity: 0; transform: scale(0.88) translateY(20px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.flip-modal-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 4px;
+}
+
+.flip-modal-suit {
+  font-size: 22px;
+}
+
+.flip-modal-title {
+  font-family: 'Cinzel', serif;
+  font-weight: 600;
+  font-size: 18px;
+  color: #8B0000;
+  flex: 1;
+  letter-spacing: 0.04em;
+}
+
+.flip-modal-numeral {
+  font-family: 'Cinzel', serif;
+  font-size: 12px;
+  color: #8B000070;
+  letter-spacing: 0.1em;
+}
+
+.flip-modal-body {
+  font-family: 'Crimson Text', serif;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #2A1200;
+  margin: 0;
+  padding: 4px 0;
+}
+
+.flip-modal-close {
+  font-family: 'Cinzel', serif;
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  color: #8B000050;
+  text-align: center;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
 /* Nav hint */
 .nav-hint {
   position: fixed;

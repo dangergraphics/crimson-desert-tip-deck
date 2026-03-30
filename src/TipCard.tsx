@@ -21,13 +21,10 @@ const TipCard: React.FC<TipCardProps> = ({
   zIndex,
   onClick,
 }) => {
-  // Arc wrapper: purely positional — translateX for spread, rotate for arc, translateY for active lift
-  // NO transformOrigin other than default (top-left), so it doesn't interfere with the flip
   const wrapperStyle: React.CSSProperties = {
     position: 'absolute',
-    // Center horizontally, sit at bottom
     bottom: 0,
-    left: `calc(50% + ${offsetX}px - 110px)`, // 110 = half card width
+    left: `calc(50% + ${offsetX}px - 110px)`,
     transition: 'all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)',
     zIndex,
     cursor: 'pointer',
@@ -36,16 +33,11 @@ const TipCard: React.FC<TipCardProps> = ({
       : 'drop-shadow(0 8px 16px rgba(0,0,0,0.6))',
   }
 
-  // Inner arc rotator: applies the fan angle around the card's own bottom-center
   const arcStyle: React.CSSProperties = {
     width: 220,
     height: 320,
     transformOrigin: 'bottom center',
-    transform: `
-      rotate(${rotation}deg)
-      translateY(${isActive ? -50 : 0}px)
-      scale(${isActive ? 1.08 : 1})
-    `,
+    transform: `rotate(${rotation}deg) translateY(${isActive ? -50 : 0}px) scale(${isActive ? 1.08 : 1})`,
     transition: 'transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)',
   }
 
