@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import TipCard from './TipCard'
-import { cards, SUIT_ICONS } from './cards'
+import { cards, SUIT_ICONS, SUIT_ART, SUIT_SVGS } from './cards'
 
 const TOTAL = cards.length
 const ROTATION_PER_CARD = 3 // degrees per position from center
@@ -65,16 +65,44 @@ const TipDeck: React.FC = () => {
         <>
           <div className="flip-backdrop" onClick={() => setFlippedIndex(null)} />
           <div className="flip-modal" onClick={() => setFlippedIndex(null)}>
-            <div className="flip-modal-card" onClick={e => e.stopPropagation()}>
-              <div className="flip-modal-header">
-                <span className="flip-modal-suit">{SUIT_ICONS[flippedCard.suit]}</span>
-                <span className="flip-modal-title">{flippedCard.title}</span>
-                <span className="flip-modal-numeral">{flippedCard.numeral}</span>
+            <div
+              className="flip-modal-card"
+              onClick={e => e.stopPropagation()}
+              style={{ position: 'relative', overflow: 'hidden' }}
+            >
+              {/* Art background in modal */}
+              <div style={{
+                position: 'absolute',
+                inset: 0,
+                backgroundImage: `url(${SUIT_ART[flippedCard.suit]})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center top',
+                borderRadius: 16,
+                zIndex: 0,
+              }} />
+              <div style={{
+                position: 'absolute',
+                inset: 0,
+                borderRadius: 16,
+                background: 'linear-gradient(160deg, rgba(240,220,160,0.93) 0%, rgba(225,205,145,0.95) 100%)',
+                zIndex: 1,
+              }} />
+              <div style={{ position: 'relative', zIndex: 2, height: '100%', display: 'flex', flexDirection: 'column' }}>
+                <div className="flip-modal-header">
+                  <span
+                    className="flip-modal-suit"
+                    style={{ display: 'inline-block', width: 22, height: 22, color: '#8B0000' }}
+                    dangerouslySetInnerHTML={{ __html: SUIT_SVGS[flippedCard.suit] }}
+                    aria-label={SUIT_ICONS[flippedCard.suit]}
+                  />
+                  <span className="flip-modal-title">{flippedCard.title}</span>
+                  <span className="flip-modal-numeral">{flippedCard.numeral}</span>
+                </div>
+                <div className="card-ornament card-ornament-dark" />
+                <p className="flip-modal-body">{flippedCard.body}</p>
+                <div className="card-ornament card-ornament-dark" />
+                <div className="flip-modal-close">tap anywhere to close · esc</div>
               </div>
-              <div className="card-ornament card-ornament-dark" />
-              <p className="flip-modal-body">{flippedCard.body}</p>
-              <div className="card-ornament card-ornament-dark" />
-              <div className="flip-modal-close">tap anywhere to close · esc</div>
             </div>
           </div>
         </>

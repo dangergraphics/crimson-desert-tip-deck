@@ -7,6 +7,37 @@ export type TipCard = {
   body: string
 }
 
+// SVG path data for suit icons (inline, no emoji)
+export const SUIT_SVGS: Record<TipCard['suit'], string> = {
+  // Crossed swords
+  combat: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M3 3l7 7m0 0l4-4 7-7-7 7-4 4zm0 0L6.5 13.5M10 10l4 4m0 0l3.5 3.5M14 14l-3 3-1.5 1.5M5 19l2-2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M3 21l4.5-4.5M21 3l-4.5 4.5M8 3L3 8M16 21l5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+  </svg>`,
+  // Compass rose
+  exploration: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5"/>
+    <path d="M12 3v3M12 18v3M3 12h3M18 12h3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+    <path d="M12 7l1.5 5H10.5L12 7z" fill="currentColor"/>
+    <path d="M12 17l-1.5-5h3L12 17z" fill="currentColor" opacity="0.5"/>
+    <circle cx="12" cy="12" r="1.5" fill="currentColor"/>
+  </svg>`,
+  // Void eye / arcane spiral
+  abyss: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 3C7 3 3 7 3 12s4 9 9 9 9-4 9-9-4-9-9-9z" stroke="currentColor" stroke-width="1.5"/>
+    <path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5z" stroke="currentColor" stroke-width="1"/>
+    <path d="M12 9.5a2.5 2.5 0 100 5 2.5 2.5 0 000-5z" stroke="currentColor" stroke-width="1"/>
+    <circle cx="12" cy="12" r="1" fill="currentColor"/>
+    <path d="M12 3v2M12 19v2M3 12h2M19 12h2" stroke="currentColor" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
+  </svg>`,
+  // Shield / social
+  social: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 2L4 6v6c0 4.4 3.4 8.5 8 9.5 4.6-1 8-5.1 8-9.5V6l-8-4z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+    <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>`,
+}
+
+// Keep emoji fallbacks for accessibility / alt text
 export const SUIT_ICONS: Record<TipCard['suit'], string> = {
   combat: '⚔️',
   exploration: '🗺️',
