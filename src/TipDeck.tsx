@@ -112,7 +112,9 @@ const TipDeck: React.FC = () => {
         const offset = i - activeIndex
         const rotation = offset * ROTATION_PER_CARD
         const offsetX = offset * cardSpread
-        const zIndex = TOTAL - Math.abs(offset)
+        // Fixed stack order: leftmost card on top, decreasing right.
+        // Active card always floats above everything.
+        const zIndex = i === activeIndex ? TOTAL + 1 : TOTAL - i
 
         return (
           <TipCard
