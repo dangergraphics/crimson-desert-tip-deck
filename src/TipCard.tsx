@@ -6,8 +6,9 @@ interface TipCardProps {
   card: TipCardType
   isActive: boolean
   isFlipped: boolean
-  rotation: number
-  offsetX: number
+  arcX: number    // horizontal offset from viewport center (px)
+  arcY: number    // vertical offset from baseline (px; negative = dips below)
+  angle: number   // card tilt (degrees)
   zIndex: number
   onClick: () => void
 }
@@ -41,8 +42,9 @@ const TipCard: React.FC<TipCardProps> = ({
   card,
   isActive,
   isFlipped,
-  rotation,
-  offsetX,
+  arcX,
+  arcY,
+  angle,
   zIndex,
   onClick,
 }) => {
@@ -50,11 +52,16 @@ const TipCard: React.FC<TipCardProps> = ({
   const artUrl = SUIT_ART[card.suit]
   const gradient = SUIT_GRADIENTS[card.suit]
 
+  // Card is positioned at its arc coordinate.
+  // Active card lifts 50px upward (negative translateY) and scales up slightly.
   const wrapperStyle: React.CSSProperties = {
     position: 'absolute',
     bottom: 0,
-    left: `calc(50% + ${offsetX}px - 110px)`,
-    transition: 'all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)',
+    // Center horizontally: 50% of container + arc offset − half card width
+    left: `calc(50% + ${arcX}px - 110px)`,
+    // Arc Y: shift card down along the arc curve (positive arcY = dips lower)
+    transform: `translateY(${-arcY}px)`,
+    transition: 'all 0.45s cubic-bezier(0.34, 1.56, 0.64, 1)',
     zIndex,
     cursor: 'pointer',
     filter: isActive
@@ -66,8 +73,9 @@ const TipCard: React.FC<TipCardProps> = ({
     width: 220,
     height: 320,
     transformOrigin: 'bottom center',
-    transform: `rotate(${rotation}deg) translateY(${isActive ? -50 : 0}px) scale(${isActive ? 1.08 : 1})`,
-    transition: 'transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)',
+    // Rotate to match arc tangent; active card lifts up and scales
+    transform: `rotate(${angle}deg) translateY(${isActive ? -50 : 0}px) scale(${isActive ? 1.08 : 1})`,
+    transition: 'transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1)',
   }
 
   const cardStyle: React.CSSProperties = {

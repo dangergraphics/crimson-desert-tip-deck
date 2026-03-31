@@ -64,9 +64,11 @@ body {
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  padding-bottom: 120px;
-  perspective: 1200px;
+  /* Extra bottom padding to give arc cards room to dip on wide screens */
+  padding-bottom: 140px;
+  perspective: 1400px;
   z-index: 1;
+  overflow: hidden;
 }
 
 /* Card faces */
